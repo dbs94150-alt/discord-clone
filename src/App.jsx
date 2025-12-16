@@ -1,4 +1,13 @@
+import { useState } from "react";
+
+const channels = [
+  { id: "general", name: "général" },
+  { id: "videos", name: "vidéos" },
+];
+
 export default function App() {
+  const [activeChannel, setActiveChannel] = useState("general");
+
   return (
     <div className="flex h-screen text-sm">
       {/* SERVERS */}
@@ -12,19 +21,29 @@ export default function App() {
       <div className="w-60 bg-discord-sidebar p-3">
         <div className="font-bold mb-4">Mon Serveur</div>
 
-        <div className="text-discord-muted hover:bg-discord-hover px-2 py-1 rounded cursor-pointer">
-          # général
-        </div>
-        <div className="text-discord-muted hover:bg-discord-hover px-2 py-1 rounded cursor-pointer">
-          # vidéos
-        </div>
+        {channels.map((channel) => (
+          <div
+            key={channel.id}
+            onClick={() => setActiveChannel(channel.id)}
+            className={`px-2 py-1 rounded cursor-pointer mb-1
+              ${
+                activeChannel === channel.id
+                  ? "bg-discord-hover text-white"
+                  : "text-discord-muted hover:bg-discord-hover"
+              }`}
+          >
+            # {channel.name}
+          </div>
+        ))}
       </div>
 
       {/* CHAT */}
       <div className="flex-1 bg-discord-chat p-4">
-        <div className="font-bold mb-4"># général</div>
-        <div>Bienvenue sur le clone Discord 👋</div>
+        <div className="font-bold mb-4">
+          # {channels.find(c => c.id === activeChannel).name}
+        </div>
+
+        <div>
+          Bienvenue dans <b>#{activeChannel}</b> 👋
+        </div>
       </div>
-    </div>
-  );
-}
