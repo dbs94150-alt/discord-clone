@@ -1,0 +1,566 @@
+/* ========================================
+   FORTNITE-LIKE BROWSER GAME - STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Segoe UI', 'Arial Black', sans-serif;
+    background: #1a1a2e;
+    cursor: crosshair;
+}
+
+/* ========================================
+   CANVAS PRINCIPAL
+   ======================================== */
+#game-canvas {
+    display: block;
+    background: linear-gradient(180deg, #87CEEB 0%, #98D8C8 60%, #7CB342 100%);
+}
+
+/* ========================================
+   ÉCRAN DE DÉMARRAGE
+   ======================================== */
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.start-content {
+    text-align: center;
+    color: white;
+}
+
+.game-title {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FF6347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 40px;
+}
+
+.controls-info {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px 40px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls-info h3 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.control-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    text-align: left;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.key {
+    background: linear-gradient(145deg, #333, #222);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #FFD700;
+    border: 1px solid #444;
+    min-width: 60px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.start-button {
+    background: linear-gradient(145deg, #FFD700, #FFA500);
+    border: none;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1a1a2e;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+/* ========================================
+   HUD PRINCIPAL
+   ======================================== */
+#hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+#hud > * {
+    pointer-events: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   BARRE DE VIE ET BOUCLIER
+   ======================================== */
+.health-container {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 400px;
+}
+
+.bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-bg {
+    flex: 1;
+    height: 20px;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.health-bg {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #2ECC71;
+}
+
+.shield-bg {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #3498DB;
+}
+
+.bar {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.health-bar {
+    background: linear-gradient(90deg, #27AE60, #2ECC71);
+    width: 100%;
+}
+
+.shield-bar {
+    background: linear-gradient(90deg, #2980B9, #3498DB);
+    width: 100%;
+}
+
+.bar-text {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 35px;
+    text-align: right;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* ========================================
+   HOTBAR / INVENTAIRE
+   ======================================== */
+.hotbar-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hotbar {
+    display: flex;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hotbar-slot {
+    width: 70px;
+    height: 70px;
+    background: rgba(50, 50, 50, 0.8);
+    border: 3px solid #444;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.hotbar-slot.active {
+    border-color: #FFD700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+.hotbar-slot.empty {
+    opacity: 0.5;
+}
+
+.slot-number {
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    font-size: 12px;
+    color: #888;
+    font-weight: bold;
+}
+
+.slot-icon {
+    font-size: 28px;
+}
+
+.slot-rarity {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 0 0 5px 5px;
+}
+
+.rarity-common { background: #888; }
+.rarity-uncommon { background: #2ECC71; }
+.rarity-rare { background: #3498DB; }
+.rarity-epic { background: #9B59B6; }
+.rarity-legendary { background: #F39C12; }
+
+/* ========================================
+   AFFICHAGE MUNITIONS
+   ======================================== */
+.ammo-container {
+    position: absolute;
+    bottom: 100px;
+    right: 30px;
+    text-align: right;
+}
+
+.ammo-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+#current-ammo {
+    color: #FFD700;
+}
+
+.ammo-separator {
+    color: #888;
+    margin: 0 5px;
+}
+
+#reserve-ammo {
+    color: #aaa;
+}
+
+.weapon-name {
+    color: #888;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* ========================================
+   RESSOURCES
+   ======================================== */
+.resources-container {
+    position: absolute;
+    bottom: 100px;
+    left: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.resource {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.resource-icon {
+    font-size: 1.5rem;
+}
+
+.resource-count {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-width: 40px;
+}
+
+/* ========================================
+   MODE CONSTRUCTION
+   ======================================== */
+.build-mode-indicator {
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid #FFD700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.build-icon {
+    font-size: 2rem;
+}
+
+#build-type {
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.build-hint {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* ========================================
+   COMPTEUR D'ÉLIMINATIONS
+   ======================================== */
+.kill-counter {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #E74C3C;
+}
+
+.skull-icon {
+    font-size: 1.5rem;
+}
+
+#kill-count {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* ========================================
+   MESSAGES DE JEU
+   ======================================== */
+.game-messages {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.game-message {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    animation: messagePopup 2s forwards;
+}
+
+@keyframes messagePopup {
+    0% { opacity: 0; transform: translateY(20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ========================================
+   MINIMAP
+   ======================================== */
+.minimap-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#minimap {
+    display: block;
+}
+
+/* ========================================
+   INDICATEUR D'INTERACTION
+   ======================================== */
+.interaction-hint {
+    position: absolute;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 12px 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid #FFD700;
+}
+
+.key-hint {
+    background: #FFD700;
+    color: #1a1a2e;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#interaction-text {
+    color: white;
+    font-size: 1rem;
+}
+
+/* ========================================
+   ÉCRAN DE MORT
+   ======================================== */
+#death-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.death-content {
+    text-align: center;
+    color: white;
+}
+
+.death-title {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.death-stats {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    color: #ddd;
+}
+
+.restart-button {
+    background: linear-gradient(145deg, #E74C3C, #C0392B);
+    border: none;
+    padding: 18px 50px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.restart-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.5);
+}
+
+/* ========================================
+   ANIMATIONS ET EFFETS
+   ======================================== */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.low-health #health-bar {
+    animation: pulse 0.5s infinite;
+}
+
+/* Effet de dégât */
+.damage-flash {
+    animation: damageFlash 0.1s;
+}
+
+@keyframes damageFlash {
+    0%, 100% { filter: none; }
+    50% { filter: brightness(0.5) sepia(1) saturate(10) hue-rotate(-20deg); }
+}
+
+/* Effet de rechargement */
+.reloading .ammo-display {
+    animation: pulse 0.5s infinite;
+    color: #F39C12;
+}

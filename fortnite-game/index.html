@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite-Like Browser Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Écran de démarrage -->
+    <div id="start-screen">
+        <div class="start-content">
+            <h1 class="game-title">🎮 FORTNITE BROWSER</h1>
+            <p class="subtitle">Un jeu Battle Royale dans le navigateur</p>
+            <div class="controls-info">
+                <h3>Contrôles</h3>
+                <div class="control-grid">
+                    <div class="control-item"><span class="key">ZQSD</span> Déplacement</div>
+                    <div class="control-item"><span class="key">ESPACE</span> Sauter</div>
+                    <div class="control-item"><span class="key">CLIC</span> Tirer</div>
+                    <div class="control-item"><span class="key">R</span> Recharger</div>
+                    <div class="control-item"><span class="key">1-5</span> Armes</div>
+                    <div class="control-item"><span class="key">B</span> Mode Build</div>
+                    <div class="control-item"><span class="key">V</span> Type Build</div>
+                    <div class="control-item"><span class="key">E</span> Interagir</div>
+                </div>
+            </div>
+            <button id="start-btn" class="start-button">▶ JOUER</button>
+        </div>
+    </div>
+
+    <!-- Canvas principal du jeu -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- HUD du jeu -->
+    <div id="hud" class="hidden">
+        <!-- Barre de vie et bouclier -->
+        <div class="health-container">
+            <div class="bar-wrapper">
+                <div class="bar-bg shield-bg">
+                    <div id="shield-bar" class="bar shield-bar"></div>
+                </div>
+                <span id="shield-text" class="bar-text">100</span>
+            </div>
+            <div class="bar-wrapper">
+                <div class="bar-bg health-bg">
+                    <div id="health-bar" class="bar health-bar"></div>
+                </div>
+                <span id="health-text" class="bar-text">100</span>
+            </div>
+        </div>
+
+        <!-- Inventaire / Hotbar -->
+        <div class="hotbar-container">
+            <div id="hotbar" class="hotbar">
+                <!-- Les slots seront générés dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Munitions et infos arme -->
+        <div class="ammo-container">
+            <div id="ammo-display" class="ammo-display">
+                <span id="current-ammo">30</span>
+                <span class="ammo-separator">/</span>
+                <span id="reserve-ammo">90</span>
+            </div>
+            <div id="weapon-name" class="weapon-name">Fusil d'Assaut</div>
+        </div>
+
+        <!-- Ressources pour construction -->
+        <div class="resources-container">
+            <div class="resource">
+                <span class="resource-icon">🪵</span>
+                <span id="wood-count" class="resource-count">0</span>
+            </div>
+            <div class="resource">
+                <span class="resource-icon">🧱</span>
+                <span id="brick-count" class="resource-count">0</span>
+            </div>
+            <div class="resource">
+                <span class="resource-icon">⚙️</span>
+                <span id="metal-count" class="resource-count">0</span>
+            </div>
+        </div>
+
+        <!-- Mode construction -->
+        <div id="build-mode-indicator" class="build-mode-indicator hidden">
+            <span class="build-icon">🔨</span>
+            <span id="build-type">MUR</span>
+            <span class="build-hint">[V] Changer</span>
+        </div>
+
+        <!-- Kill count -->
+        <div class="kill-counter">
+            <span class="skull-icon">💀</span>
+            <span id="kill-count">0</span>
+        </div>
+
+        <!-- Messages de jeu -->
+        <div id="game-messages" class="game-messages"></div>
+
+        <!-- Minimap -->
+        <div class="minimap-container">
+            <canvas id="minimap" width="150" height="150"></canvas>
+        </div>
+
+        <!-- Indicateur d'interaction -->
+        <div id="interaction-hint" class="interaction-hint hidden">
+            <span class="key-hint">E</span>
+            <span id="interaction-text">Ouvrir le coffre</span>
+        </div>
+    </div>
+
+    <!-- Écran de mort -->
+    <div id="death-screen" class="hidden">
+        <div class="death-content">
+            <h1 class="death-title">☠️ ÉLIMINÉ</h1>
+            <p class="death-stats">Éliminations: <span id="final-kills">0</span></p>
+            <button id="restart-btn" class="restart-button">🔄 REJOUER</button>
+        </div>
+    </div>
+
+    <!-- Scripts du jeu -->
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/weapons.js"></script>
+    <script src="js/building.js"></script>
+    <script src="js/chest.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
